@@ -1,0 +1,39 @@
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# 1. Load and clean the data
+df = pd.read_csv('auto-mpg.csv')
+# Convert horsepower to numeric and handle non-numeric '?' values
+
+df['horsepower'] = pd.to_numeric(df['horsepower'], errors='coerce')
+#In its raw form, the horsepower column contains the character '?' for missing values. 
+#Because of this single string character, Pandas loads the entire column as an object (text) rather than numbers.
+
+#What your code does:
+#By using pd.to_numeric(..., errors='coerce'), you are telling Pandas:
+
+#Convert everything in the column to a number (float).
+
+#errors='coerce': If you encounter something that isn't a number (like '?'), don't crash. 
+#Instead, turn it into NaN (Not a Number/null).
+df = df.dropna(subset=['horsepower'])
+
+# 2. Create the scatter plot
+plt.figure(figsize=(10, 6))
+
+sns.scatterplot(
+    data=df,
+    x='horsepower',    # Horizontal axis
+    y='mpg',           # Vertical axis
+    hue='origin',      # Color by origin
+    style='origin',    # Different markers by origin
+    size='weight',     # Size of dots based on car weight
+    palette='Set1',    # Color palette
+)
+
+# 3. Final Styling
+plt.title('MPG vs Horsepower (Colored by Origin, Sized by Weight)', fontsize=15)
+plt.tight_layout()
+
+plt.show()
