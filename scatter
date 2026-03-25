@@ -1,0 +1,38 @@
+import pandas as pd
+import plotly.express as px
+import plotly.io as pio
+pio.renderers.default='notebook'
+
+data = {
+    "Hours_Studied": [2,3,4,5,6,7,8,3,5],
+    "Marks": [40,50,55,65,70,80,85,48,68],
+    "Gender": ["Male","Female","Male","Female","Male","Female","Male",
+               "Female","Male"],
+    "Attendance": [60,70,75,80,85,90,95,72,88],
+    "Department": ["IT","IT","HR","HR","Finance","Finance","IT","HR","Finance"]
+}
+
+df = pd.DataFrame(data)
+fig = px.scatter(
+    df,
+    x="Hours_Studied",
+    y="Marks",
+    width=900,
+    height=500,
+    title="Student Performance Analysis",
+    color="Gender",                 # grouping by color
+    size="Attendance",              # bubble size
+    color_discrete_map={
+        "Male": "blue",
+        "Female": "red"
+    },
+    
+#     color_discrete_sequence=["blue","red"],
+
+    symbol="Gender",                # different marker shapes
+    
+#     facet_col="Department",         # separate charts by column
+#     facet_row="Gender"              # separate charts by row
+)
+
+fig.show()
