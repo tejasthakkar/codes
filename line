@@ -1,0 +1,24 @@
+import pandas as pd
+import plotly.express as px
+
+data = {
+    "Month": ["Jan","Feb","Mar","Apr","Jan","Feb","Mar","Apr"],
+    "Sales": [100,120,140,160,90,110,130,150],
+    "Region": ["North","North","North","North",
+               "South","South","South","South"]
+}
+
+df = pd.DataFrame(data)
+fig = px.line(
+    df,
+    x="Month",
+    y="Sales",
+    color="Region",
+    markers=True,
+    width=800,
+    height=500,
+    title="Monthly Sales Comparison",
+    color_discrete_sequence=["blue","red"]
+)
+
+fig.show()
