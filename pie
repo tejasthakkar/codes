@@ -1,21 +1,23 @@
+import pandas as pd
+import plotly.express as px
+
 data = {
-    "Marks":[40,45,50,55,60,65,70,75,80,85],
-    "Gender":["Male","Female","Male","Female","Male",
-              "Female","Male","Female","Male","Female"]
+    "Department": ["IT", "HR", "Finance", "Marketing"],
+    "Employees": [40, 20, 25, 15]
 }
 
 df = pd.DataFrame(data)
-fig = px.histogram(
+fig = px.pie(
     df,
-    x="Gender",
-    y='Marks',
-    nbins=5,
-    color="Gender",
-    histfunc="sum",
-    pattern_shape="Gender",
-    text_auto=True,
-    color_discrete_map={"Male":"blue","Female":"pink"},
-#     color_discrete_sequence=["blue","pink"] #Optional
+    values="Employees",
+    names="Department",
+    color_discrete_sequence=["blue", "green", "orange", "red"],
+    title="Employee Distribution by Department"
 )
 
+fig.update_traces(
+    textinfo="percent+label",
+    textposition="inside",
+    pull=[0,0.1,0,0]
+)
 fig.show()
