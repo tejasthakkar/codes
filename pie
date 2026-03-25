@@ -1,0 +1,21 @@
+data = {
+    "Marks":[40,45,50,55,60,65,70,75,80,85],
+    "Gender":["Male","Female","Male","Female","Male",
+              "Female","Male","Female","Male","Female"]
+}
+
+df = pd.DataFrame(data)
+fig = px.histogram(
+    df,
+    x="Gender",
+    y='Marks',
+    nbins=5,
+    color="Gender",
+    histfunc="sum",
+    pattern_shape="Gender",
+    text_auto=True,
+    color_discrete_map={"Male":"blue","Female":"pink"},
+#     color_discrete_sequence=["blue","pink"] #Optional
+)
+
+fig.show()
